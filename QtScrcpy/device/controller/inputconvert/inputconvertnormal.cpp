@@ -105,7 +105,7 @@ void InputConvertNormal::keyEvent(const QKeyEvent *from, const QSize &frameSize,
     if (!controlMsg) {
         return;
     }
-    controlMsg->setInjectKeycodeMsgData(action, keyCode, convertMetastate(from->modifiers()));
+    controlMsg->setInjectKeycodeMsgData(action, keyCode, 0, convertMetastate(from->modifiers()));
     sendControlMsg(controlMsg);
 }
 

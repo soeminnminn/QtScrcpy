@@ -122,6 +122,10 @@ or you can [build it by yourself](##Build)
 ### Linux
 you can [build it by yourself](##Build)(just ubuntu test)
 
+library dependencies:
+ - libxcb-xkb-dev
+ - mesa-common-dev
+
 
 ## Run
 

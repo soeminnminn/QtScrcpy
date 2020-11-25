@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QCoreApplication>
 #include <QDebug>
 #include <QFile>
 #include <QSurfaceFormat>
@@ -22,6 +23,7 @@ QtMsgType covertLogLevel(const QString &logLevel);
 
 int main(int argc, char *argv[])
 {
+#ifdef QT_DEBUG
     // set env
 #ifdef Q_OS_WIN32
     qputenv("QTSCRCPY_ADB_PATH", "../../../../third_party/adb/win/adb.exe");
@@ -39,6 +41,8 @@ int main(int argc, char *argv[])
     qputenv("QTSCRCPY_SERVER_PATH", "../../../third_party/scrcpy-server");
     qputenv("QTSCRCPY_CONFIG_PATH", "../../../config");
     qputenv("QTSCRCPY_KEYMAP_PATH", "../../../keymap");
+#endif
+
 #endif
 
     g_msgType = covertLogLevel(Config::getInstance().getLogLevel());
@@ -73,10 +77,12 @@ int main(int argc, char *argv[])
     Stream::init();
     QApplication a(argc, argv);
 
+#ifdef QT_DEBUG
     // windows下通过qmake VERSION变量或者rc设置版本号和应用名称后，这里可以直接拿到
     // mac下拿到的是CFBundleVersion的值
     qDebug() << a.applicationVersion();
     qDebug() << a.applicationName();
+#endif
 
     //update version
     QStringList versionList = QCoreApplication::applicationVersion().split(".");
@@ -104,6 +110,7 @@ int main(int argc, char *argv[])
     g_mainDlg->setWindowTitle(Config::getInstance().getTitle());
     g_mainDlg->show();
 
+#ifdef QT_DEBUG
     qInfo(
         "%s",
         QObject::tr("This software is completely open source and free. Strictly used for illegal purposes, or at your own risk. You can download it at the "
@@ -111,6 +118,7 @@ int main(int argc, char *argv[])
             .toUtf8()
             .data());
     qInfo() << QString("QtScrcpy %1 <https://github.com/barry-ran/QtScrcpy>").arg(QCoreApplication::applicationVersion()).toUtf8();
+#endif
 
     int ret = a.exec();
 

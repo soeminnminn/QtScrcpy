@@ -1,0 +1,31 @@
+{
+	"switchKey": "Key_QuoteLeft",
+	"keyMapNodes": [
+		{
+			"comment": "Directional pad",
+			"type": "KMT_STEER_WHEEL",
+			"centerPos": {
+				"x": 0.127,
+				"y": 0.778
+			},
+			"leftOffset": 0.07,
+			"rightOffset": 0.07,
+			"upOffset": 0.16,
+			"downOffset": 0.12,
+			"leftKey": "Key_A",
+			"rightKey": "Key_D",
+			"upKey": "Key_W",
+			"downKey": "Key_S"
+		},
+		{
+			"comment": "Attack Key",
+			"type": "KMT_CLICK",
+			"key": "Key_Space",
+			"pos": {
+				"x": 0.9,
+				"y": 0.77
+			},
+			"switchMap": false
+		}
+	]
+}

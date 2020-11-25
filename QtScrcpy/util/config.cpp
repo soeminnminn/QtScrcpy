@@ -14,7 +14,7 @@
 #define COMMON_PUSHFILE_DEF "/sdcard/"
 
 #define COMMON_SERVER_VERSION_KEY "ServerVersion"
-#define COMMON_SERVER_VERSION_DEF "1.14"
+#define COMMON_SERVER_VERSION_DEF "1.16"
 
 #define COMMON_SERVER_PATH_KEY "ServerPath"
 #define COMMON_SERVER_PATH_DEF "/data/local/tmp/scrcpy-server.jar"
@@ -71,7 +71,8 @@ Config::Config(QObject *parent) : QObject(parent)
     m_settings = new QSettings(getConfigPath() + "/config.ini", QSettings::IniFormat);
     m_settings->setIniCodec("UTF-8");
 
-    m_userData = new QSettings(getConfigPath() + "/userdata.ini", QSettings::IniFormat);
+    // m_userData = new QSettings(getConfigPath() + "/userdata.ini", QSettings::IniFormat);
+    m_userData = new QSettings(QSettings::IniFormat, QSettings::UserScope, "barry-ran");
     m_userData->setIniCodec("UTF-8");
 }
 

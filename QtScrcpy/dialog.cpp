@@ -85,7 +85,13 @@ Dialog::~Dialog()
 void Dialog::initUI()
 {
     setAttribute(Qt::WA_DeleteOnClose);
+#ifdef Q_OS_LINUX
+    Qt::WindowFlags flags = Qt::Window | Qt::WindowSystemMenuHint | Qt::WindowMinimizeButtonHint
+                                | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint;
+    setWindowFlags(flags);
+#else
     setWindowFlags(windowFlags() | Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
+#endif
 
     ui->bitRateBox->addItem("2000000");
     ui->bitRateBox->addItem("6000000");
@@ -126,7 +132,10 @@ void Dialog::initUI()
 
 #ifdef Q_OS_LINUX
     // linux need more width
-    setFixedWidth(480);
+    setFixedWidth(620);
+
+    QPixmap windowIcon(":/QtScrcpy.png");
+    setWindowIcon(windowIcon);
 #endif
 }
 

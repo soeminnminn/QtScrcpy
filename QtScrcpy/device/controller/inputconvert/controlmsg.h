@@ -41,7 +41,7 @@ public:
     ControlMsg(ControlMsgType controlMsgType);
     virtual ~ControlMsg();
 
-    void setInjectKeycodeMsgData(AndroidKeyeventAction action, AndroidKeycode keycode, AndroidMetastate metastate);
+    void setInjectKeycodeMsgData(AndroidKeyeventAction action, AndroidKeycode keycode, quint32 repeat, AndroidMetastate metastate);
     void setInjectTextMsgData(QString &text);
     // id 代表一个触摸点，最多支持10个触摸点[0,9]
     // action 只能是AMOTION_EVENT_ACTION_DOWN，AMOTION_EVENT_ACTION_UP，AMOTION_EVENT_ACTION_MOVE
@@ -67,6 +67,7 @@ private:
             {
                 AndroidKeyeventAction action;
                 AndroidKeycode keycode;
+                quint32 repeat;
                 AndroidMetastate metastate;
             } injectKeycode;
             struct

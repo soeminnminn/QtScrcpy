@@ -5,6 +5,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QMetaEnum>
+#include <QStandardPaths>
 
 #include "keymap.h"
 
@@ -21,6 +22,10 @@ const QString &KeyMap::getKeyMapPath()
         QFileInfo fileInfo(s_keyMapPath);
         if (s_keyMapPath.isEmpty() || !fileInfo.isDir()) {
             s_keyMapPath = QCoreApplication::applicationDirPath() + "/keymap";
+        }
+        QFileInfo fileInfoApp(s_keyMapPath);
+        if (!fileInfoApp.isDir()) {
+            s_keyMapPath = QStandardPaths::locate(QStandardPaths::AppLocalDataLocation, "keymap", QStandardPaths::LocateDirectory);
         }
     }
     return s_keyMapPath;

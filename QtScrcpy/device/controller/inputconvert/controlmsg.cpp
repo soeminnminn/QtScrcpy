@@ -19,10 +19,11 @@ ControlMsg::~ControlMsg()
     }
 }
 
-void ControlMsg::setInjectKeycodeMsgData(AndroidKeyeventAction action, AndroidKeycode keycode, AndroidMetastate metastate)
+void ControlMsg::setInjectKeycodeMsgData(AndroidKeyeventAction action, AndroidKeycode keycode, quint32 repeat, AndroidMetastate metastate)
 {
     m_data.injectKeycode.action = action;
     m_data.injectKeycode.keycode = keycode;
+    m_data.injectKeycode.repeat = repeat;
     m_data.injectKeycode.metastate = metastate;
 }
 
@@ -105,6 +106,7 @@ QByteArray ControlMsg::serializeData()
     case CMT_INJECT_KEYCODE:
         buffer.putChar(m_data.injectKeycode.action);
         BufferUtil::write32(buffer, m_data.injectKeycode.keycode);
+        BufferUtil::write32(buffer, m_data.injectKeycode.repeat);
         BufferUtil::write32(buffer, m_data.injectKeycode.metastate);
         break;
     case CMT_INJECT_TEXT:
